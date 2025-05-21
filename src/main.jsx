@@ -1,10 +1,10 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import YooKassaUnityLanding from './YooKassaUnityLanding.jsx'
-import './index.css'
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import './index.css';
+import YooKassaUnityLanding from './YooKassaUnityLanding.jsx';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
     <YooKassaUnityLanding />
-  </React.StrictMode>,
-)
+  </StrictMode>
+);
