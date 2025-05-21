@@ -80,7 +80,7 @@ export default function YooKassaUnityLanding() {
   ];
 
   return (
-    <div className="flex min-h-screen w-full font-sans">
+    <div className="flex min-h-screen w-full font-sans bg-white">
       {/* Left stripe */}
       <aside
         className="hidden md:flex w-24 lg:w-72 flex-col items-center justify-center"
@@ -90,7 +90,7 @@ export default function YooKassaUnityLanding() {
           <motion.span className="text-white text-2xl rotate-90 md:rotate-0">YooKassa</motion.span>
         ) : (
           <motion.img
-            src="/logo-yookassa-unity.png"
+            src="logo-yookassa-unity.png"
             alt="YooKassa logo"
             className="w-28 lg:w-44 select-none"
             onError={() => setLogoError(true)}
