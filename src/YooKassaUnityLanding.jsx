@@ -1,160 +1,98 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
-
-// Simple SVG icons instead of lucide-react (чтобы не ставить lib)
-const IconCheck = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current">
-    <path d="M5 13l4 4L19 7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const IconBook = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current">
-    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" strokeWidth="2" />
-    <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5z" strokeWidth="2" />
-  </svg>
-);
-const IconServer = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6 fill-none stroke-current">
-    <rect x="2" y="3" width="20" height="8" rx="2" strokeWidth="2" />
-    <rect x="2" y="13" width="20" height="8" rx="2" strokeWidth="2" />
-    <path d="M6 7h.01M6 17h.01" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
-
-// Tailwind utility card & button
-const Card = ({ children }) => (
-  <div className="border border-slate-200 shadow-md hover:shadow-lg transition-shadow bg-white rounded-xl">
-    {children}
-  </div>
-);
-const CardContent = ({ children }) => (
-  <div className="p-6 flex flex-col items-start gap-4">{children}</div>
-);
-const Input = (props) => (
-  <input
-    {...props}
-    className={`px-4 py-3 rounded-lg border outline-none focus:ring-2 ring-blue-500 transition ${props.className || ""}`}
-  />
-);
-const Button = ({ children, ...rest }) => (
-  <button
-    {...rest}
-    className="rounded-lg px-6 py-4 font-semibold text-white shadow-md hover:shadow-lg active:scale-95 transition"
-    style={{ backgroundColor: brandAccent }}
-  >
-    {children}
-  </button>
-);
-
-// Colors
-const brandBgFrom = "#0d1e37";
-const brandBgTo = "#122b55";
-const brandAccent = "#0066ff";
+// src/YooKassaUnityLanding.jsx
+import React, { useState } from "react";
 
 export default function YooKassaUnityLanding() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-  const [logoError, setLogoError] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const benefits = [
+  const cards = [
     {
-      icon: <IconCheck className="w-8 h-8" />,
+      icon: "/yookassa-landing/img/check.png",
       title: "Полная интеграция",
-      text: "Приём платежей, web‑hooks, чеки 54‑ФЗ — всё из коробки.",
+      text: "Приём платежей, web-hooks, чеки 54-ФЗ — всё из коробки.",
+      alt: "Полная интеграция",
     },
     {
-      icon: <IconBook className="w-8 h-8" />,
+      icon: "/yookassa-landing/img/book-open.png",
       title: "Документация RU/EN",
       text: "Чёткий гайд + пример сцены. Запустите демо и меняйте префабы.",
+      alt: "Документация",
     },
     {
-      icon: <IconServer className="w-8 h-8" />,
+      icon: "/yookassa-landing/img/server.png",
       title: "Безболезненный деплой",
-      text: "UPM‑пакет + Docker‑сервер за 1 команду. Никаких шаманств.",
+      text: "UPM-пакет + Docker-сервер за 1 команду. Никаких шаманств.",
+      alt: "Деплой",
     },
   ];
 
   return (
-    <div className="flex min-h-screen w-full font-sans bg-white">
-      {/* Left stripe */}
-      <aside
-        className="hidden md:flex w-24 lg:w-72 flex-col items-center justify-center"
-        style={{ backgroundImage: `linear-gradient(180deg, ${brandBgFrom} 0%, ${brandBgTo} 100%)` }}
-      >
-        {logoError ? (
-          <motion.span className="text-white text-2xl rotate-90 md:rotate-0">YooKassa</motion.span>
-        ) : (
-          <motion.img
-            src="logo-yookassa-unity.png"
-            alt="YooKassa logo"
-            className="w-28 lg:w-44 select-none"
-            onError={() => setLogoError(true)}
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+    <div className="flex min-h-screen">
+      {/* Sidebar */}
+      <aside className="hidden md:flex w-1/3 bg-gradient-to-b from-[#0d1e37] to-[#122b55] items-center justify-center">
+        <div className="text-center text-white">
+          <img
+            src="/yookassa-landing/img/logo-yookassa-unity-white.png"
+            alt="YooKassa for Unity"
+            className="mx-auto w-32 mb-4"
           />
-        )}
+          <h2 className="text-2xl font-semibold">
+            YooKassa
+            <br />
+            for Unity
+          </h2>
+        </div>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 flex flex-col items-center p-6 bg-white text-slate-900">
-        {/* Hero */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="max-w-3xl text-center mt-12"
-        >
-          <h1 className="text-3xl md:text-5xl font-extrabold mb-4">YooKassa for Unity</h1>
-          <p className="text-base md:text-xl text-slate-600">
-            Первый неофициальный SDK, который подключает YooKassa в&nbsp;Unity‑игры на&nbsp;Android за 30&nbsp;минут.
+      {/* Main */}
+      <main className="flex-1 bg-white py-12 px-6 flex flex-col items-center">
+        {/* Header */}
+        <header className="w-full max-w-4xl text-center mb-12">
+          <h1 className="text-4xl font-bold">YooKassa for Unity</h1>
+          <p className="mt-2 text-gray-600">
+            Первый неофициальный SDK, который подключает YooKassa в Unity-игры
+            на Android за 30 минут.
           </p>
-        </motion.header>
+        </header>
 
-        {/* Benefits */}
-        <section className="grid md:grid-cols-3 gap-6 mt-16 max-w-5xl w-full px-2">
-          {benefits.map((b) => (
-            <Card key={b.title}>
-              <CardContent>
-                <div className="p-2 rounded-2xl text-white" style={{ backgroundColor: brandAccent }}>
-                  {b.icon}
-                </div>
-                <h3 className="text-lg font-semibold text-slate-900">{b.title}</h3>
-                <p className="text-slate-600 leading-relaxed">{b.text}</p>
-              </CardContent>
-            </Card>
+        {/* Cards */}
+        <section className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+          {cards.map(({ icon, title, text, alt }, i) => (
+            <div
+              key={i}
+              className="bg-white border border-slate-200 rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 flex flex-col items-start gap-4"
+            >
+              <div className="bg-blue-600 p-3 rounded-full">
+                <img src={icon} alt={alt} className="w-6 h-6" />
+              </div>
+              <h3 className="font-semibold">{title}</h3>
+              <p className="text-gray-600 text-sm">{text}</p>
+            </div>
           ))}
         </section>
 
         {/* Email form */}
-        <motion.section initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="mt-20 w-full max-w-md">
-          <Card>
-            <CardContent className="items-center">
-              {submitted ? (
-                <>
-                  <IconCheck className="w-12 h-12 text-green-500" />
-                  <p className="text-xl font-medium text-center text-slate-800">Спасибо! Мы сообщим первыми о старте альфы.</p>
-                </>
-              ) : (
-                <>
-                  <p className="text-center text-lg text-slate-700">Хотите ранний доступ и скидку Early‑bird? Оставьте e‑mail.</p>
-                  <form onSubmit={handleSubmit} className="w-full flex flex-col gap-4">
-                    <Input required type="email" placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)} />
-                    <Button type="submit">Хочу уведомление</Button>
-                  </form>
-                </>
-              )}
-            </CardContent>
-          </Card>
-        </motion.section>
+        <section className="w-full max-w-4xl bg-gray-50 p-6 rounded-xl shadow-sm">
+          <p className="text-gray-700 mb-4 text-center">
+            Разработка уже идёт. Хотите получить ранний доступ и скидку Early-bird?
+            Оставьте e-mail.
+          </p>
+          <input
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full bg-white border border-slate-200 rounded-lg px-4 py-3 mb-4 outline-none focus:ring-2 focus:ring-blue-500"
+          />
+          <button className="w-full bg-blue-600 text-white rounded-lg px-6 py-3 font-semibold hover:shadow transition-transform active:scale-95">
+            Хочу уведомление
+          </button>
+        </section>
 
-        <footer className="mt-24 mb-8 text-slate-500 text-sm text-center max-w-2xl">
-          *YooKassa for Unity — неофициальный community‑плагин. YooKassa является товарным знаком АО «НКО ЮKassa».*
+        {/* Footer */}
+        <footer className="w-full max-w-4xl text-gray-500 text-sm text-center mt-12">
+          *YooKassa for Unity — это неофициальный SDK, созданный независимыми
+          разработчиками. Он не связан с YooMoney или Сбером. Используется на свой
+          страх и риск.
         </footer>
       </main>
     </div>
