@@ -2,19 +2,23 @@
   "name": "yookassa-landing",
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://DenNagorniy.github.io/yookassa-landing",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
-    "framer-motion": "^10.18.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "framer-motion": "^10.18.0"
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^3.1.0",
     "autoprefixer": "^10.4.14",
+    "gh-pages": "^6.0.0",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.4.4",
     "vite": "^4.5.14",
