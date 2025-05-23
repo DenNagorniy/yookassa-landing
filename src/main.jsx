@@ -1,10 +1,8 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
+import YooKassaUnityLanding from './YooKassaUnityLanding'
 import './index.css'
-import YooKassaUnityLanding from './YooKassaUnityLanding.jsx'
 
-createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <YooKassaUnityLanding />
-  </React.StrictMode>
-)
+const container = document.getElementById('root')
+const root = createRoot(container)
+root.render(<YooKassaUnityLanding />)
